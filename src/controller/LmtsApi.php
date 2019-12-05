@@ -161,7 +161,7 @@ class LmtsApi extends Controller
       }
     }
 
-    public static function autorizar($acao){
+    public function autorizar($acao){
       $acl = explode(';', session('acl'));
       foreach ($acl as $key) {
         if($key == $acao){
