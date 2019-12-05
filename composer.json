@@ -1,0 +1,26 @@
+{
+    "name": "lmts/api",
+    "description": "Interface para o uso da API do LMTS.",
+    "require": {
+        "guzzlehttp/guzzle": "^6.5@dev"
+    },
+    "authors": [
+        {
+            "name": "Lucas S",
+            "email": "lucas.siqueira.araujo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload":{
+      "psr-4":{
+        "Lmts\\": "src/"
+      }
+    },
+    "extra":{
+      "laravel":{
+        "providers": [
+          "Lmts\\src\\LmtsApiServiceProvider"
+        ]
+      }
+    }
+}
