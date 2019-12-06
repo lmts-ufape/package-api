@@ -2,7 +2,7 @@
     "name": "lmts/api",
     "description": "Interface para o uso da API do LMTS.",
     "require": {
-        "guzzlehttp/guzzle": "^6.5@dev"
+        "guzzlehttp/guzzle": "^6.4@dev"
     },
     "authors": [
         {
