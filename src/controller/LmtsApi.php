@@ -181,7 +181,8 @@ class LmtsApi extends Controller
           foreach($acl as $key){
             $stringAcl = $stringAcl . $key . ';';
           }
-          $request->session()->put('acl', $stringAcl);
+          session(['acl' => $stringAcl]);
+
           return redirect()->route('home');
 
         }
@@ -191,19 +192,19 @@ class LmtsApi extends Controller
         }
       }
       else{
-        $request->session()->put('id', $user['id']);
-        $request->session()->put('email', $user['email']);
-        $request->session()->put('cursoId', $user['cursoId']);
-        $request->session()->put('tipo', $user['tipo']);
+        session(['id' => $user['id']]);
+        session(['email' => $user['email']]);
+        session(['cursoId' => $user['cursoId']]);
+        session(['tipo' => $user['tipo']]);
         $acl = $this->getAcl($user['tipoUsuario']);
         $stringAcl = '';
         foreach($acl as $key){
           $stringAcl = $stringAcl . $key . ';';
         }
-        $request->session()->put('acl', $stringAcl);
+        session(['acl' => $stringAcl]);
         return redirect()->route('home');
       }
 
     }
-    
+
 }
