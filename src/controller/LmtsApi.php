@@ -89,7 +89,7 @@ class LmtsApi extends Controller
     }
 
     public function getAcl($tipoUsusario){
-      $response = $this->client->request('GET',$this->api . $this->modulo . '/getAcl/' . $tipoUsusario, [
+      $response = $this->client->request('GET',$this->api . $this->modulo . 'getAcl/' . $tipoUsusario, [
       'headers' => [
       'Authorization' => session('token_type').' '.session('access_token'),
       'Content-Type' => 'application/json',
