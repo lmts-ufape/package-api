@@ -24,20 +24,24 @@ class LmtsApi extends Controller
     }
 
     public function check(){
-
-      $response = $this->client->request('GET',$this->api . 'check/', [
-        'headers' => [
-          'Authorization' => session('token_type').' '.session('access_token'),
-          'Content-Type' => 'application/json',
-          'X-Requested-With' => 'XMLHttpRequest'
-        ]
-      ]);
-      if($response->getStatusCode() == 201){
-        return true;
-      }
-      else{
+      try{
+        $response = $this->client->request('GET',$this->api . 'check/', [
+          'headers' => [
+            'Authorization' => session('token_type').' '.session('access_token'),
+            'Content-Type' => 'application/json',
+            'X-Requested-With' => 'XMLHttpRequest'
+          ]
+        ]);
+        if($response->getStatusCode() == 201){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }catch(ClientException $e){
         return false;
       }
+
     }
 
     public function getCursos(){
