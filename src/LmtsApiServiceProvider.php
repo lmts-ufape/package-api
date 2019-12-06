@@ -24,7 +24,7 @@ class LmtsApiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
+        // $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
         $this->publishes([
         __DIR__ . '/config' => config_path(),
         __DIR__ . '/middleware' => base_path('app/Http/Middleware'),

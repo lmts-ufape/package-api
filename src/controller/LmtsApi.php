@@ -171,25 +171,11 @@ class LmtsApi extends Controller
       return false;
     }
 
-    public function login(Request $request){
-      $user = $this->loginApi($request->email, $request->password);
+    public function login($email, $password){
+      $user = $this->loginApi($email, $password);
       if(is_null($user)){
-        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-        if(Auth::check()){
-          $acl = $this->getAcl('4');
-          $stringAcl = '';
-          foreach($acl as $key){
-            $stringAcl = $stringAcl . $key . ';';
-          }
-          session(['acl' => $stringAcl]);
-
-          return redirect()->route('home');
-
-        }
-        else{
-
-          return redirect()->route('login')->withInput(['email' => $request->email])->withErrors(['email' => 'E-mail ou Senha incorreta.']);
-        }
+        return redirect()->route('login')->withInput(['email' => $request->email])
+                                         ->withErrors(['email' => 'E-mail ou Senha incorreta.']);
       }
       else{
         session(['id' => $user['id']]);
