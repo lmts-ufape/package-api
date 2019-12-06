@@ -183,9 +183,9 @@ class LmtsApi extends Controller
       else{
         session(['id' => $user['id']]);
         session(['email' => $user['email']]);
-        session(['cursoId' => $user['cursoId']]);
-        session(['tipo' => $user['tipo']]);
-        $acl = $this->getAcl($user['tipoUsuario']);
+        session(['unidadeOrgId' => $user['unidadeOrgId']]);
+        session(['tipoNome' => $user['tipoNome']]);
+        $acl = $this->getAcl($user['tipoUsuarioId']);
         $stringAcl = '';
         foreach($acl as $key){
           $stringAcl = $stringAcl . $key . ';';
