@@ -174,8 +174,7 @@ class LmtsApi extends Controller
     public function login($email, $password){
       $user = $this->loginApi($email, $password);
       if(is_null($user)){
-        return redirect()->route('login')->withInput(['email' => $request->email])
-                                         ->withErrors(['email' => 'E-mail ou Senha incorreta.']);
+        return false;
       }
       else{
         session(['id' => $user['id']]);
@@ -188,7 +187,7 @@ class LmtsApi extends Controller
           $stringAcl = $stringAcl . $key . ';';
         }
         session(['acl' => $stringAcl]);
-        return redirect()->route('home');
+        return true;
       }
 
     }
