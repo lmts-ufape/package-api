@@ -170,4 +170,40 @@ class LmtsApi extends Controller
       }
       return false;
     }
+
+    public function login(Request $request){
+      $user = $this->loginApi($request->email, $request->password);
+      if(is_null($user)){
+        Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+        if(Auth::check()){
+          $acl = $this->getAcl('4');
+          $stringAcl = '';
+          foreach($acl as $key){
+            $stringAcl = $stringAcl . $key . ';';
+          }
+          $request->session()->put('acl', $stringAcl);
+          return redirect()->route('home');
+
+        }
+        else{
+
+          return redirect()->route('login')->withInput(['email' => $request->email])->withErrors(['email' => 'E-mail ou Senha incorreta.']);
+        }
+      }
+      else{
+        $request->session()->put('id', $user['id']);
+        $request->session()->put('email', $user['email']);
+        $request->session()->put('cursoId', $user['cursoId']);
+        $request->session()->put('tipo', $user['tipo']);
+        $acl = $this->getAcl($user['tipoUsuario']);
+        $stringAcl = '';
+        foreach($acl as $key){
+          $stringAcl = $stringAcl . $key . ';';
+        }
+        $request->session()->put('acl', $stringAcl);
+        return redirect()->route('home');
+      }
+
+    }
+    
 }
