@@ -206,6 +206,7 @@ class LmtsApi extends Controller
       if($response->getStatusCode() == 200){
         $response = json_decode($response->getBody(), true);
         return $response;
+      }
       else{
         return null;
       }
