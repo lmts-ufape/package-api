@@ -196,4 +196,19 @@ class LmtsApi extends Controller
 
     }
 
+    public function getPais($raiz, $idUnidade){
+      $response = $this->client->request('GET',$this->api . $this->modulo .'/getPais/' . $raiz . '/' . $idUnidade, [
+        'headers' => [
+          'Content-Type' => 'application/json',
+          'X-Requested-With' => 'XMLHttpRequest'
+        ]
+      ]);
+      if($response->getStatusCode() == 200){
+        $response = json_decode($response->getBody(), true);
+        return $response;
+      else{
+        return null;
+      }
+    }
+
 }
